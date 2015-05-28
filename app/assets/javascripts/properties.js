@@ -8,10 +8,17 @@ $(document).ready(function() {
   $('.selectpicker').selectpicker();
 
   $("#moneySlide").slider({});
+  var myTimeout
   $("#moneySlide").on("slide", function(slideEvt) {
     $("#lowVal").text(slideEvt.value[0]);
     $("#highVal").text(slideEvt.value[1]);
-    $.get($("#properties_search").attr("action"), $("#properties_search").serialize(), null, "script");
+    if(myTimeout){
+      clearTimeout(myTimeout);
+    }
+    myTimeout = setTimeout(function(){
+      $.get($("#properties_search").attr("action"), $("#properties_search").serialize(), null, "script");
+    }
+    , 500);
     return false;
   });
 
@@ -42,7 +49,7 @@ $(document).ready(function() {
   };
 
   function addToWishList(){
-    var property_id = $(this).attr("data-id");            
+    var property_id = $(this).attr("data-id");
 
     $.ajax({
       method: "POST",
@@ -62,12 +69,12 @@ $(document).ready(function() {
 
     $.ajax({
       method: "DELETE",
-      url: "/favorites/" + property_id 
+      url: "/favorites/" + property_id
     });
 
     $(this).removeClass("on-wishlist").addClass("wishlist");
     $(".wishlist-text").text("Add to Wishlist")
-    
+
     detachRemoveFromWishListHandler(".on-wishlist");
     attachAddToWishListHandler(".wishlist");
   };
