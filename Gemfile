@@ -12,7 +12,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
-gem 'passenger'
+gem 'puma'
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
 gem 'aasm'
@@ -27,7 +27,6 @@ gem 'skylight'
 gem 'will_paginate'
 gem 'populator'
 gem 'redis-rails'
-gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'better_errors'
